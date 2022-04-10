@@ -140,12 +140,12 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="account.view_account_payment_tree"/>
         <field name="arch" type="xml">
-            <field name="name" position="attributes">
+            <!-- <field name="name" position="attributes">
                 <attribute name="optional">hide</attribute>
             </field>
             <field name="name" position="after">
                 <field name="check_number"/>
-            </field>
+            </field> -->
             <field name="payment_method_line_id" position="replace"/>
             <field name="date" position="after">
                 <field name="l10n_latam_check_payment_date" string="Payment Date" optional="show"/>
