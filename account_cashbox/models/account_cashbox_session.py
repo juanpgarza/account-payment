@@ -4,6 +4,7 @@
 ##############################################################################
 from odoo import models, fields, api, _, Command
 from odoo.exceptions import UserError, ValidationError
+from datetime import datetime
 
 POP_SESSION_STATE = [
     ('draft', 'Draft'),
@@ -123,7 +124,7 @@ class AccountCashboxSession(models.Model):
                 max_diff_in_currency = line.cashbox_session_id.cashbox_id.max_diff
                 if line.journal_id.currency_id:
                     max_diff_in_currency = line.journal_id.currency_id._convert(
-                        line.cashbox_session_id.cashbox_id.max_diff, line.cashbox_session_id.cashbox_id.company_id.currency_id)
+                        line.cashbox_session_id.cashbox_id.max_diff, line.cashbox_session_id.cashbox_id.company_id.currency_id, line.cashbox_session_id.cashbox_id.company_id, datetime.today())
 
                 diff = abs(line.balance_end - line.balance_end_real)
                 if diff > max_diff_in_currency:
