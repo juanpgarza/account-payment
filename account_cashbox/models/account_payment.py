@@ -58,12 +58,12 @@ class AccountPayment(models.Model):
 
         super().action_post()
 
-    def action_cancel(self):
-        closed_sessions = self.filtered(lambda x: x.cashbox_session_id.state == 'closed')
-        if closed_sessions:
-            raise UserError(_(
-                "Can't cancel a payment on a closed payment session. Payment ids: %s") % closed_sessions.ids)
-        super().action_cancel()
+    # def action_cancel(self):
+    #     closed_sessions = self.filtered(lambda x: x.cashbox_session_id.state == 'closed')
+    #     if closed_sessions:
+    #         raise UserError(_(
+    #             "Can't cancel a payment on a closed payment session. Payment ids: %s") % closed_sessions.ids)
+    #     super().action_cancel()
 
     @api.depends('payment_type', 'cashbox_session_id')
     def _compute_available_journal_ids(self):

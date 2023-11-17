@@ -152,9 +152,9 @@ class AccountCashboxSession(models.Model):
         if any(x.state != 'draft' for x in self):
             raise UserError(_('You can only delete sessions in "OPEN CONTROL" status.'))
 
-    @api.constrains('state', 'cashbox_id')
-    def _check_active_cashbox(self):
-        for rec in self.filtered(lambda x: x.state != 'closed' and not x.cashbox_id.allow_concurrent_sessions ):
-            other_opened_sessions = self.search([('state', '!=', 'closed'), ('id', '!=', rec.id), ('cashbox_id', '=', rec.cashbox_id.id)])
-            if other_opened_sessions:
-                raise UserError(_('You can only have one open Session for %s' % rec.cashbox_id.display_name))
+    # @api.constrains('state', 'cashbox_id')
+    # def _check_active_cashbox(self):
+    #     for rec in self.filtered(lambda x: x.state != 'closed' and not x.cashbox_id.allow_concurrent_sessions ):
+    #         other_opened_sessions = self.search([('state', '!=', 'closed'), ('id', '!=', rec.id), ('cashbox_id', '=', rec.cashbox_id.id)])
+    #         if other_opened_sessions:
+    #             raise UserError(_('You can only have one open Session for %s' % rec.cashbox_id.display_name))
